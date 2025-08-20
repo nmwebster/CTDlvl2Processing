@@ -1,5 +1,5 @@
 # CTDlvl2Processing
-A MATLAB packaged for completing level 2 processing on Sea-Bird Scientific CTD level 1 data files. 
+A MATLAB package for completing level 2 processing on Sea-Bird Scientific CTD level 1 data files. 
 
 At the UAF-Oceans Lab, headed by <a href="https://www.uaf.edu/cfos/people/faculty/detail/seth-danielson.php">Dr. Seth L. Danielson</a>, we define the following CTD data levels:
 
