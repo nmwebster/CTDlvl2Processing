@@ -17,3 +17,5 @@ global CTDstatic PARAMS
 addpath Modules
 
 guiCTD
+
+%test edit
