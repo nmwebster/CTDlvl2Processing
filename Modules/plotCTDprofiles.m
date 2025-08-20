@@ -1,0 +1,83 @@
+function plotCTDprofiles(CTDvariables,maxPRESSURE,UPdown,nCOL,nROW)
+
+a = dir('CNVfiles/*.cnv');
+
+
+[mANC,nANC] = size(CTDvariables);
+
+if mANC < nCOL*nROW, 
+    disp(['Ya Gotta modify the # of Columns & Rows so that all of your variables have a subplot of their own to live in.']); beep; 
+end
+ 
+
+for INfile = 1:length(a);
+    FILEtitle = a(INfile).name;
+    disp(['Plotting ' num2str(INfile) ' = ' FILEtitle]);
+    w = findstr(FILEtitle,'_');
+    if ~isempty(w),
+        FILEtitle(w) = '-';
+    end
+    
+    clear D* X* H V*
+    [H,D] = sbehead(['CNVfiles/' a(INfile).name]);
+    [m,n] = size(H);
+        Y1 = [];
+    for XY = 1:m
+        if findstr(H(XY,:),'# name ');
+            w = findstr(H(XY,:),' ');
+            if findstr(H(XY,:),'Pressure'),
+                Y1 = str2num(H(XY,w(2):w(3)))+1;
+                Y1L = deblank(H(XY,w(5):end));
+            end
+            for XY2 = 1:mANC,
+                if findstr(H(XY,:),deblank(CTDvariables(XY2,:)));
+                    eval(['X' num2str(XY2) ' = str2num(H(XY,w(2):w(3)))+1;']);
+                    eval(['X' num2str(XY2) 'L = deblank(H(XY,w(5):end));']);
+                end
+            end
+        end
+    end
+        
+            w = find(D(:,Y1) == max(D(:,Y1)));
+            D1 = D(1:w,:);
+            D2 = D(end:-1:w,:);
+            if UPdown == 1 
+                D = D1;
+            elseif UPdown == 0, %~UPdown 
+                D = D2; % gotta take downcast
+            else
+                D = D; % take the whole ting
+            end
+        
+        wMAX = find(D(:,Y1) == max(D(:,Y1)));
+        figure(1); clf; orient landscape
+        for XY2 = 1:mANC
+            if exist(['X' num2str(XY2)]),
+            subplot(nROW,nCOL,XY2);
+                eval(['V = X' num2str(XY2) ';']);
+                eval(['VL = X' num2str(XY2) 'L;']);           
+                plot(D(1:wMAX,V),D(1:wMAX,Y1),'k-','linewidth',3); hold on
+                plot(D(1:wMAX,V),D(1:wMAX,Y1),'r+','markersize',10);
+                plot(D(wMAX:end,V),D(wMAX:end,Y1),'k-','linewidth',3); hold on
+                plot(D(wMAX:end,V),D(wMAX:end,Y1),'b+','markersize',10);
+                set(gca,'ydir','reverse','fontweight','bold','fontsize',8)
+                ylabel('Pressure (db)','fontweight','bold','fontsize',8)
+                xlabel(VL,'fontweight','bold','fontsize',8)
+                grid on
+                box on       
+                if max(D(:,Y1)) > maxPRESSURE,
+                    set(gca,'ylim',[0 maxPRESSURE]);
+                end
+                %if findstr(VL,'Salinity'), set(gca,'xlim',[30 32]), end
+                %if findstr(VL,'sigma'), set(gca,'xlim',[23 25]), end
+                    
+            end
+        end
+            
+        st = suptitle([FILEtitle]);
+        %keyboard
+        set(st,'fontweight','bold','fontsize',16)
+         if 1,
+           eval(['print -dpng -r150 Plots/' FILEtitle(1:end-4) '_sensors.png'])
+         end
+end
