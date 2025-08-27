@@ -151,7 +151,8 @@ elseif strcmp(action,'setUPdown_SS')
     PARAMS.UPdown_SS = str2num(get(CTDstatic.verify.UPdown_SS,'String'));
 
 elseif strcmp(action,'setdepLat')
-    PARAMS.depLat = str2num(get(CTDstatic.verify.depLat,'String'));
+    %PARAMS.depLat = str2num(get(CTDstatic.verify.depLat,'String'));
+    PARAMS.depLat = get(CTDstatic.verify.depLat,'String');
 
 elseif strcmp(action,'setpltDat')
     PARAMS.pltDat = str2num(get(CTDstatic.verify.pltDat,'String'));

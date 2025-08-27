@@ -4,21 +4,22 @@ function Interp_CTD(cruisename)
 % To run, syntax like Interp_ctd('VB1') where data is in VB1.ascii
 %
 
- global D HRD HRDD DD w w1 num in2 lx wx l1 l2  cruise COLS HEADER
+ global D HRD HRDD DD w w1 num in2 lx wx l1 l2  cruise COLS HEADER PARAMS
 
  % D will have columns: 1-CS 2-PR 3-T1 4-S1 5-Sigt1 6-FLAG 7-Delta-D
  
 BASEPATH = ['.\'];             % for PC !!!!
 
 cruise = cruisename;
-      
+
+addpath(PARAMS.outdir)
 eval(['load ' cruise '.ascii']);
 Dpro = eval([ cruise ';']);
 %eval(['load ' cruise 'RAW.ascii']);
 %Draw = eval([ cruise 'RAW;']);
 Draw = eval([ cruise ';']);
 
-fid = fopen([cruise '.ascii'],'r');
+fid = fopen([PARAMS.outdir '\' cruise '.ascii'],'r');
 HEADER = '';
 while 1,
     line1 = fgetl(fid);

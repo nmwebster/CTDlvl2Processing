@@ -55,7 +55,7 @@ fprintf(fileID,'PARAMS.addNMEA = %1i ;\n',CTDstatic.verify.addNMEA.Value);
 fprintf(fileID,'PARAMS.botDep = %1i ;\n',CTDstatic.verify.botDep.Value);
 fprintf(fileID,'PARAMS.botFor = ''%s'' ;\n',CTDstatic.verify.botFor.String);
 fprintf(fileID,'PARAMS.depLat = ''%s'' ;\n',CTDstatic.verify.depLat.String);
-fprintf(fileID,'PARAMS.pltDat = %1i ;\n',str2num(CTDstatic.verify.pltDat.String));
+fprintf(fileID,'PARAMS.pltDat = %s ;\n',CTDstatic.verify.pltDat.String);
 if ~isempty(CTDstatic.verify.excluDat.String)
     fprintf(fileID,'PARAMS.excluDat = %1i ;\n',str2num(CTDstatic.verify.excluDat.String));
 end

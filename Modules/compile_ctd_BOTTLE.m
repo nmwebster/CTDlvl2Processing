@@ -15,7 +15,7 @@ for in = 1:length(files)
     end
 end
  
-   fid2 = fopen([cruise '_bottles.all'],'w');
+   fid2 = fopen([PARAMS.outdir '\' cruise '_bottles.all'],'w');
    fclose(fid2);
    [m,n] = size(BTL);
 
@@ -23,7 +23,7 @@ for in = 1:m
    disp(['File ' num2str(in) ' = ' strtrim(BTL(in,:)) ]);
    D = [];
    fid = fopen([BASE_path deblank(BTL(in,:)) '.btl'],'r');
-   fid2 = fopen([cruise '_bottles.all'],'a');
+   fid2 = fopen([PARAMS.outdir '\' cruise '_bottles.all'],'a');
    if fid > 0,
    while 1,
        line1 = fgetl(fid);
@@ -47,7 +47,7 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-   fid3 = fopen([cruise '_bottleTrips.dat'],'w');
+   fid3 = fopen([PARAMS.outdir '/' cruise '_bottleTrips.dat'],'w');
    fclose(fid3);
    [m,n] = size(BTL);
 
@@ -55,7 +55,7 @@ for in = 1:m
    disp(['File ' num2str(in) ' = ' strtrim(BTL(in,:)) ]);
    D = [];
    fid = fopen([BASE_path deblank(BTL(in,:)) '.btl'],'r');
-   fid3 = fopen([cruise '_bottleTrips.dat'],'a');
+   fid3 = fopen([PARAMS.outdir '\' cruise '_bottleTrips.dat'],'a');
    if fid > 0,
    while 1,
        line1 = fgetl(fid);
