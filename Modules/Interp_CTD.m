@@ -8,7 +8,7 @@ function Interp_CTD(cruisename)
 
  % D will have columns: 1-CS 2-PR 3-T1 4-S1 5-Sigt1 6-FLAG 7-Delta-D
  
-BASEPATH = ['.\'];             % for PC !!!!
+BASEPATH = ['./'];             % for PC !!!!
 
 cruise = cruisename;
 
@@ -19,7 +19,7 @@ Dpro = eval([ cruise ';']);
 %Draw = eval([ cruise 'RAW;']);
 Draw = eval([ cruise ';']);
 
-fid = fopen([PARAMS.outdir '\' cruise '.ascii'],'r');
+fid = fopen([PARAMS.outdir '/' cruise '.ascii'],'r');
 HEADER = '';
 while 1,
     line1 = fgetl(fid);

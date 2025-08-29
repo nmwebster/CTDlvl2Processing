@@ -3,7 +3,7 @@ function compile_ctd_BOTTLE(PROGRAM, cruise)
 global PARAMS
 
 %BASE_path = ['~/projects/CTD/BTLfiles/']; %Seth's hardcoded path for mac
-BASE_path = [PARAMS.indir '\BTLfiles\'];
+BASE_path = [PARAMS.indir '/BTLfiles/'];
 addpath(BASE_path)
 
 Months = 'JanFebMarAprMayJunJulAugSepOctNovDec';
@@ -16,7 +16,7 @@ for in = 1:length(files)
     end
 end
 
-fid3 = fopen([PARAMS.outdir '\' PROGRAM '_' cruise '_ctdBottleData_L2_v1.csv'],'w');
+fid3 = fopen([PARAMS.outdir '/' PROGRAM '_' cruise '_ctdBottleData_L2_v1.csv'],'w');
 fclose(fid3)
 
 %%%%%%%%%%%%%%%%%%% VARIABLES DERIVED FROM .HDR FILE %%%%%%%%%%%%%%%%%%%%%%
@@ -25,7 +25,7 @@ STATIONS = [];
 NAMES = [];
 STNAME = [];
 STGD = [];
-fid = fopen([PARAMS.outdir '\' cruise '.hdr'],'r');
+fid = fopen([PARAMS.outdir '/' cruise '.hdr'],'r');
 
 while ~0, 
     line1 = fgetl(fid);

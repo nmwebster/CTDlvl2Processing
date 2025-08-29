@@ -231,7 +231,7 @@ end
 if compileCNVs,
 close all
 [mANC,nANC] = size(CTDvariables); % # of variables
-a = dir([PARAMS.indir '\CNVfiles\*.cnv']); % find all .cnv files in the subdirectory CNVfiles
+a = dir([PARAMS.indir '/CNVfiles/*.cnv']); % find all .cnv files in the subdirectory CNVfiles
 
 for INfile = 1:length(a) % loop through each file
     FILEtitle = a(INfile).name; % name of the file to work on
@@ -426,8 +426,8 @@ for INfile = 1:length(a) % loop through each file
 
         if INfile == 1, 
             percents = '%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%';
-            fid = fopen([PARAMS.outdir '\' outFILE],'w');
-            fid2 = fopen([PARAMS.outdir '\' hdrFILE],'w');
+            fid = fopen([PARAMS.outdir '/' outFILE],'w');
+            fid2 = fopen([PARAMS.outdir '/' hdrFILE],'w');
             TOPlines = strvcat(['% Data File Name: ' outFILE],['% Header Data File Name: ' hdrFILE],percents,'% Data File Column Contents:');
             fprintf(fid,'%s\n',percents);
             [m,n] = size(TOPlines);
@@ -449,8 +449,8 @@ for INfile = 1:length(a) % loop through each file
                 fprintf(fid,'%s\n',['% ' H(XY,:)]);
             end
         else
-            fid = fopen([PARAMS.outdir '\' outFILE],'a');            
-            fid2 = fopen([PARAMS.outdir '\' hdrFILE],'a');
+            fid = fopen([PARAMS.outdir '/' outFILE],'a');            
+            fid2 = fopen([PARAMS.outdir '/' hdrFILE],'a');
         end
         fprintf(fid,outfmt,D');
         fclose(fid);

@@ -9,7 +9,7 @@ global D DD cruise COLS HEADER PARAMS
     STATION_NAME = [];
     STATION_DATE = [];
     FILE_INSTRUMENT_PLATFORM = [];
-    fid = fopen([PARAMS.outdir '\' cruise '.hdr'],'r');
+    fid = fopen([PARAMS.outdir '/' cruise '.hdr'],'r');
    
     while ~0,
         line1 = fgetl(fid);
@@ -127,13 +127,13 @@ if strcmp(button,'Yes')
     end
     outfmtCSV= ['%s, ' outfmtCSV(2:end) ',' outfmt(w(end):end-2) ', '];
 
-    fid = fopen([PARAMS.outdir '\' cruise '.ascii'],'w');  
+    fid = fopen([PARAMS.outdir '/' cruise '.ascii'],'w');  
     [m,n] = size(HEADER);
     for inO = 1:m
         fprintf(fid,'%s\n',HEADER(inO,:));     
     end
     
-    fid2 = fopen([PARAMS.outdir '\' cruise '_profiles.ascii'],'w');  
+    fid2 = fopen([PARAMS.outdir '/' cruise '_profiles.ascii'],'w');  
     [m,n] = size(HEADER);
     for inO = 1:m
         fprintf(fid2,'%s\n',HEADER(inO,:));     
@@ -180,19 +180,19 @@ if strcmp(button,'Yes')
         fclose(fid);
         disp(['Check "' cruise '.all.ctd_casts" for hydroplot data file.'])
 
-    fid = fopen([PARAMS.outdir '\' cruise '.all.ctd_stations'],'w');
+    fid = fopen([PARAMS.outdir '/' cruise '.all.ctd_stations'],'w');
     fprintf(fid,'%6.1f %11.5f %12.5f %7.1f\n',S2(:,[1 3 2 4])');
     fclose(fid); 
     disp(['Check "' cruise '.all.ctd_stations" for station number, latitude, longitude and depth.'])
 
-    fid = fopen([PARAMS.outdir '\' cruise '.all.ctd_stn_names'],'w');
+    fid = fopen([PARAMS.outdir '/' cruise '.all.ctd_stn_names'],'w');
     for inx = 1:length(goodSTNS)
         fprintf(fid,'%s \n',[N2(inx,:)]);
     end
     fclose(fid);
     disp(['Check "' cruise '.all.stn_names" for station name, date and time.'])
     
-    fid = fopen([PARAMS.outdir '\' cruise '.all.dat'],'w');
+    fid = fopen([PARAMS.outdir '/' cruise '.all.dat'],'w');
     fprintf(fid,'%6.1f \n',goodSTNS');
     fclose(fid);
     disp(['Check "' cruise '.all.dat" for listing of all station numbers.'])
@@ -219,7 +219,7 @@ if strcmp(button,'Yes')
 
 %%%% Write out CSV CTD archive for Research Workspace
  
-    fid3 = fopen([PARAMS.outdir '\' PROGRAM '_' cruise '_ctd_L2_v1.csv'],'w');  
+    fid3 = fopen([PARAMS.outdir '/' PROGRAM '_' cruise '_ctd_L2_v1.csv'],'w');  
     %fprintf(fid3,'%s \r\n',['Cruise,Station,Type,Date_Time,Longitude_[decimal_degrees_east],Latitude_[decimal_degrees_north],Bottom Depth [m],Cast,Pressure_[dbar],Depth_[m],Temperature_[C],Temperature2_[C],Conductivity_[S/m],Conductivity2_[S/m],Voltage0_[V],Voltage1_[V],Voltage2_[V],Voltage3_[V],Voltage4_[V],Voltage5_[V],Voltage6_[V],Voltage7_[V],Fluorescence_[mg/m^3],BeamAttenuation_[1/m],BeamTransmission_[%],Oxygen_[umol/kg],Oxygen_[umol/kg],PAR_[umol_photons/m2/sec],LISST200X,Salinity_[psu],Salinity_[psu],Density_[kg/m3_sigmat],Density_[kg/m3_sigmat], Flag, filename, instrument, platform, LOCAL_CDI_ID']);
     fprintf(fid3, '%s \r\n',['Cruise,Station,Type,Date_Time,Longitude_[decimal_degrees_east],Latitude_[decimal_degrees_north],Bottom Depth [m]' ',' PARAMS.outfmtHead ',' 'filename,instrument,platform,LOCAL_CDI_ID']);
     for in = 1:length(STGD(:,1))
@@ -243,10 +243,10 @@ if strcmp(button,'Yes')
     % eval(['!cp ' cruise '.all.dat           ~/matlabSD/PLOTS/Transects/' cruise '.all.dat']);
     % disp('Files *.all.* copied to PLOT/Data and PLOTS/Transects as appropriate.')
     
-    eval(['!copy ' cruise '.all.ctd_stn_names ' PARAMS.outdir '\' cruise '.all.ctd_stn_names']);
-    eval(['!copy ' cruise '.all.ctd_stations '  PARAMS.outdir '\' cruise '.all.ctd_stations']);
-    eval(['!copy ' cruise '.all.ctd_casts '     PARAMS.outdir '\' cruise '.all.ctd_casts']);
-    eval(['!copy ' cruise '.all.dat '           PARAMS.outdir '\' cruise '.all.dat']);
+    eval(['!copy ' cruise '.all.ctd_stn_names ' PARAMS.outdir '/' cruise '.all.ctd_stn_names']);
+    eval(['!copy ' cruise '.all.ctd_stations '  PARAMS.outdir '/' cruise '.all.ctd_stations']);
+    eval(['!copy ' cruise '.all.ctd_casts '     PARAMS.outdir '/' cruise '.all.ctd_casts']);
+    eval(['!copy ' cruise '.all.dat '           PARAMS.outdir '/' cruise '.all.dat']);
     disp('Files *.all.* copied to selected output directory as appropriate.')
 
 
