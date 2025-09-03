@@ -18,5 +18,4 @@ addpath Modules
 
 guiCTD
 
-%last update: 8/20/25 nmwebster
-% update: 8/29/25 sldanielson
+%last update: 9/2/25 nmwebster

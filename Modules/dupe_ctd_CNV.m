@@ -10,27 +10,26 @@ function dupe_ctd_CNV(cruise,addNMEA,botDep,botFormat)
 % botFormat = 'Bottom Depth';
 
 global PARAMS
-
-BASE_path = [PARAMS.outdir '\'];
-addpath CNVfiles
-if not(isfolder('CNVdupeLvl2'))
-    mkdir('CNVdupeLvl2')
+BASE_path = [PARAMS.outdir '/'];
+%addpath CNVfiles
+if not(isfolder([PARAMS.outdir '/CNVdupeLvl2']))
+    mkdir([PARAMS.outdir '/CNVdupeLvl2'])
 end
-addpath CNVdupeLvl2
+addpath([PARAMS.outdir '/CNVdupeLvl2']);
 
-a = dir('CNVfiles\*.cnv'); % find all .cnv files in the subdirectory CNVfiles
+a = dir([PARAMS.outdir '/CNVfiles/*.cnv']); % find all .cnv files in the subdirectory CNVfiles
 
 bigData = [cruise '.ascii'];
 D = load(bigData,"-ascii");
 
 for INfile = 1:length(a) % loop through each file
     FILEtitle = a(INfile).name; % name of the file to work on
-    fid1 = fopen(FILEtitle,'r');
-    
-    OUTfile = ([BASE_path 'CNVdupeLvl2\' FILEtitle]);
+    fid1 = fopen([PARAMS.indir '/CNVfiles/' FILEtitle],'r');
+
+    OUTfile = ([BASE_path 'CNVdupeLvl2/' FILEtitle]);
     fid2 = fopen(OUTfile,'a');
 
-    [H,~] = sbehead([BASE_path '\CNVfiles\' FILEtitle]); % read in header (H) and data (D) from .cnv file
+    [H,~] = sbehead([BASE_path '/CNVfiles/' FILEtitle]); % read in header (H) and data (D) from .cnv file
     [m,n] = size(H);
     while 1
          lineIN = fgetl(fid1);
@@ -57,7 +56,7 @@ for INfile = 1:length(a) % loop through each file
                         latstr = (['* NMEA Latitude = ' num2str(abs(deg)) ' ' num2str(min) ' ' compass]);
                     end
                     
-                    if findstr(H(XY,:),'Longitude') % look for the Latitude row
+                    if findstr(H(XY,:),'Longitude') % look for the Longitude row
                         long = str2num(H(XY,w(2):end));
                         deg = floor(abs(long));
                         %deg = -floor(long); %use this one for ISC202306NPSOC b/c forgot negatives when typing longitudes
@@ -93,10 +92,10 @@ for INfile = 1:length(a) % loop through each file
     
     wcast = find(D(:,1) == INfile);
     castData = D(wcast,2:end);
-    fprintf(fid2,'%9.3f %9.3f %8.4f %8.4f %9.6f %9.6f %8.4f %8.4f %8.4f %8.4f %8.4f %8.4f %8.4f %8.4f %8.4f %9.3f %8.4f %9.3f %9.3f %9.3f %8.3f %10.6f %8.4f %8.4f %9.6f %9.6f %8.4f\n',castData');
-
+    %fprintf(fid2,'%9.3f %9.3f %8.4f %8.4f %9.6f %9.6f %8.4f %8.4f %8.4f %8.4f %8.4f %8.4f %8.4f %8.4f %8.4f %9.3f %8.4f %9.3f %9.3f %9.3f %8.3f %10.6f %8.4f %8.4f %9.6f %9.6f %8.4f\n',castData');
+    fprintf(fid2,PARAMS.outfmt(5:end),castData'); % start at position 5 because the CSN isn't output in these dupe files so no %4i to start off
 
 end
 
-fclose(fid1)
-fclose(fid2)
+fclose(fid1);
+fclose(fid2);

@@ -169,7 +169,7 @@ if strcmp(button,'Yes')
     FC = input(['From the header information above, what column is the fluorometer voltage in?? (CR [enter key] for no fluorometer)']);
     xtraCOLUMNS = [10 10 18 19 20 21];
    
-        fid = fopen([PARAMS.outdir '\' cruise '.all.ctd_casts'],'w');
+        fid = fopen([PARAMS.outdir '/' cruise '.all.ctd_casts'],'w');
     if ~isempty(FC), 
         DOUT = [D(:,[1 2 3 4 5]) Dpro(:,FC)];
         fprintf(fid,'%6.1f %6.1f %8.3f %8.3f %8.3f %8.3f\n',DOUT'); 
