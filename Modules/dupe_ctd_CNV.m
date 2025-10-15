@@ -24,6 +24,7 @@ D = load(bigData,"-ascii");
 
 for INfile = 1:length(a) % loop through each file
     FILEtitle = a(INfile).name; % name of the file to work on
+    castNum = str2num(FILEtitle(end-6:end-4));
     fid1 = fopen([PARAMS.indir '/CNVfiles/' FILEtitle],'r');
 
     OUTfile = ([BASE_path 'CNVdupeLvl2/' FILEtitle]);
@@ -89,8 +90,8 @@ for INfile = 1:length(a) % loop through each file
              fprintf(fid2,'%s \r\n',lineIN);
          end
     end
-    
-    wcast = find(D(:,1) == INfile);
+
+    wcast = find(D(:,1) == castNum);
     castData = D(wcast,2:end);
     %fprintf(fid2,'%9.3f %9.3f %8.4f %8.4f %9.6f %9.6f %8.4f %8.4f %8.4f %8.4f %8.4f %8.4f %8.4f %8.4f %8.4f %9.3f %8.4f %9.3f %9.3f %9.3f %8.3f %10.6f %8.4f %8.4f %9.6f %9.6f %8.4f\n',castData');
     fprintf(fid2,PARAMS.outfmt(5:end),castData'); % start at position 5 because the CSN isn't output in these dupe files so no %4i to start off
