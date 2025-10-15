@@ -64,7 +64,7 @@ for in = 1:m
    disp(['File ' num2str(in) ' = ' strtrim(BTL(in,:)) ]);
    D = [];
    fid = fopen([BASE_path deblank(BTL(in,:)) '.btl'],'r');
-   fid3 = fopen([PARAMS.outdir '\' PROGRAM '_' cruise '_ctdBottleData_L2_v1.csv'],'a');
+   fid3 = fopen([PARAMS.outdir '/' PROGRAM '_' cruise '_ctdBottleData_L2_v1.csv'],'a');
 
    if fid > 0,
    while 1,
