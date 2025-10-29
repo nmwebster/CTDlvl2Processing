@@ -11,13 +11,13 @@ Months = 'JanFebMarAprMayJunJulAugSepOctNovDec';
 files = dir(BASE_path);
 BTL = [];
 for in = 1:length(files)
-    if ~isempty(findstr(files(in).name,'.btl')),
+    if ~isempty(findstr(files(in).name,'.btl'))
         BTL = strvcat(BTL,files(in).name(1:findstr(files(in).name,'.btl')-1));
     end
 end
 
 fid3 = fopen([PARAMS.outdir '/' PROGRAM '_' cruise '_ctdBottleData_L2_v1.csv'],'w');
-fclose(fid3)
+fclose(fid3);
 
 %%%%%%%%%%%%%%%%%%% VARIABLES DERIVED FROM .HDR FILE %%%%%%%%%%%%%%%%%%%%%%
 
@@ -27,10 +27,10 @@ STNAME = [];
 STGD = [];
 fid = fopen([PARAMS.outdir '/' cruise '.hdr'],'r');
 
-while ~0, 
+while ~0
     line1 = fgetl(fid);
     if ~isstr(line1), break, end
-    if isempty(strfind(line1(1),'%')),
+    if isempty(strfind(line1(1),'%'))
        coms = findstr(line1,',');
        % DATE1 = datenum(['0' line1(coms(2)+1:coms(4)-1)],'mm/dd/yyyy,HH:MM:SS');
        % DATE2 = datestr(DATE1,'mmm dd yyyy HH:MM:SS');
@@ -38,7 +38,7 @@ while ~0,
        DATE2 = strtrim(DATE2);
        ST = [str2num(line1(1:coms(1)-1)) str2num(line1(coms(4)+1:coms(5)-1)) str2num(line1(coms(3)+1:coms(4)-1)) str2num(line1(coms(5)+1:coms(6)-1))];
 
-       if length(ST) == 4,
+       if length(ST) == 4
             STATIONS = [STATIONS; str2num(line1(1:coms(1)-1)) str2num(line1(coms(4)+1:coms(5)-1)) str2num(line1(coms(3)+1:coms(4)-1)) str2num(line1(coms(5)+1:coms(6)-1))];
        else
             STATIONS = [STATIONS; str2num(line1(1:coms(1)-1)) str2num(line1(coms(4)+1:coms(5)-1)) str2num(line1(coms(3)+1:coms(4)-1)) NaN];
@@ -83,7 +83,7 @@ for in = 1:m
             warning('off','MATLAB:dispatcher:InexactCaseMatch')
             VARrow = startsWith(string(PARAMS.VARIABLEnameFORMATheader),header(:,ix),'IgnoreCase',true);
             VARrow = find(VARrow == 1); VARrow = VARrow(1); 
-            if ~isempty(VARrow),
+            if ~isempty(VARrow)
                 outfmtH = [outfmtH strtrim(PARAMS.VARIABLEnameFORMATheader(VARrow,62:end)) ','];  % change the 62 if the variable definition array got bigger
             else
                 disp(['No corresponding column found for: ' strtrim(COLUMNnames(ix,:))])

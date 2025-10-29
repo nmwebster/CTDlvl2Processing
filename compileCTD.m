@@ -285,7 +285,7 @@ for INfile = 1:length(a) % loop through each file
         if findstr(line1,'** Longitude') & lon == 0, lon = 1; LON = strtrim(line1(14:end));end
         if findstr(line1,'** Station ID:'), stnname = 1; STNNAME = strtrim(line1(15:end)); end
         if findstr(line1,'** Station:'), stnname = 1; STNNAME = strtrim(line1(12:end)); end
-        if findstr(line1,'** Station'), stnname = 1; STNNAME = strtrim(line1(11:end)); end
+        if findstr(line1,'** Station') & stnname == 0, stnname = 1; STNNAME = strtrim(line1(11:end)); end
         if findstr(line1,'** Station Name:'), stnname = 1; STNNAME = strtrim(line1(17:end)); end
         if findstr(line1,'** Operator:'), observer = 1; OBSERVER = strtrim(line1(13:end)); end
         if findstr(line1,'** Operator'), observer = 1; OBSERVER = strtrim(line1(12:end)); end
@@ -349,10 +349,16 @@ for INfile = 1:length(a) % loop through each file
         set(st,'fontweight','bold','fontsize',16)
 
         if printEPS, % print the figure to an EPS file and a PNG file
-           eval(['print -depsc2 Plots/' FILEtitle(1:end-4) '_TS.eps'])
+           current = pwd;
+           cd([PARAMS.outdir '/Plots/'])
+           print([FILEtitle(1:end-4) '_TS.eps'],'-depsc2')
+           cd(current)
         end
         if printPNG, % print the figure to an EPS file and a PNG file
-           eval(['print -dpng -r150 Plots/' FILEtitle(1:end-4) '_TS.png'])
+           current = pwd;
+           cd([PARAMS.outdir '/Plots/'])
+           print([FILEtitle(1:end-4) '_TS.png'],'-dpng','-r150')
+           cd(current)
         end
         
        if promptFORupcastDOWNCAST

@@ -57,9 +57,12 @@ while 1,
     end    
 end
 fclose(fid);
- 
+
+oldpath = path;
+path(oldpath,PARAMS.outdir)
 %eval(['! cp ' cruise '.ascii ' cruise '.ascii_orig']) %mac
-eval(['! copy ' cruise '.ascii ' cruise '.ascii_orig'])  %pc
+%eval(['! copy ' cruise '.ascii ' cruise '.ascii_orig'])  %pc
+copyfile([PARAMS.outdir '/' cruise '.ascii'],[PARAMS.outdir '/' cruise '.ascii_orig'])  %pc
 
 
 % COLUMNS OF DATA MATRIX D =  1=CS, 2=PR, 3=T1, 4=S1, 5=Sigt1, 6=FLAG  
