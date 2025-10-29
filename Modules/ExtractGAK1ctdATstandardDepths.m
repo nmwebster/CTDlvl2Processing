@@ -4,12 +4,12 @@ global PARAMS
 
 cruise = deblank(cruise);
 
-fid = fopen([PARAMS.outdir '\' cruise '_newGAK1.dat'],'w');
+fid = fopen([PARAMS.outdir '/' cruise '_newGAK1.dat'],'w');
 fclose(fid);
 
 for in = 1:1
-    fid = fopen([PARAMS.outdir '\' cruise '.all.ctd_stn_names'],'r');
-    fid2 = fopen([PARAMS.outdir '\' cruise '.all.ctd_stations'],'r');
+    fid = fopen([PARAMS.outdir '/' cruise '.all.ctd_stn_names'],'r');
+    fid2 = fopen([PARAMS.outdir '/' cruise '.all.ctd_stations'],'r');
     CS = [];
     YR = [];
     MO = [];
@@ -61,7 +61,7 @@ for in = 1:1
     fclose(fid);
     fclose(fid2);
 
-    eval(['load ' PARAMS.outdir '\' cruise '.all.ctd_casts']);
+    eval(['load ' PARAMS.outdir '/' cruise '.all.ctd_casts']);
     eval(['D = ' cruise '_all;']);
      
     LEVEL = [0 10 20 30 50 75 100 150 200 250];
@@ -75,7 +75,7 @@ for in = 1:1
           for iny = 1:length(LEVEL)
               where = find(DD(:,2) == LEVEL(iny));
               if ~isempty(where),
-                  fid = fopen([PARAMS.outdir '\' cruise '_newGAK1.dat'],'a');
+                  fid = fopen([PARAMS.outdir '/' cruise '_newGAK1.dat'],'a');
                   fprintf(fid,'%10.5f, %5.1f, %6.3f, %6.3f, %6.3f, %9.6f, %16s, %3i  \n',FY(inx),LEVEL(iny),DD(where,3:6),['% ' upper(cruise)],CS(inx));
                   fclose(fid);
               end
