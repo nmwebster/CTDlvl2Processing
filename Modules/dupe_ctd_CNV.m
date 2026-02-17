@@ -17,7 +17,7 @@ if not(isfolder([PARAMS.outdir '/CNVdupeLvl2']))
 end
 addpath([PARAMS.outdir '/CNVdupeLvl2']);
 
-a = dir([PARAMS.outdir '/CNVfiles/*.cnv']); % find all .cnv files in the subdirectory CNVfiles
+a = dir([PARAMS.indir '/CNVfiles/*.cnv']); % find all .cnv files in the subdirectory CNVfiles
 
 bigData = [cruise '.ascii'];
 D = load(bigData,"-ascii");
@@ -28,9 +28,9 @@ for INfile = 1:length(a) % loop through each file
     fid1 = fopen([PARAMS.indir '/CNVfiles/' FILEtitle],'r');
 
     OUTfile = ([BASE_path 'CNVdupeLvl2/' FILEtitle]);
-    fid2 = fopen(OUTfile,'a');
+    fid2 = fopen(OUTfile,'w');
 
-    [H,~] = sbehead([BASE_path '/CNVfiles/' FILEtitle]); % read in header (H) and data (D) from .cnv file
+    [H,~] = sbehead([PARAMS.indir '/CNVfiles/' FILEtitle]); % read in header (H) and data (D) from .cnv file
     [m,n] = size(H);
     while 1
          lineIN = fgetl(fid1);

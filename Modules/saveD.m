@@ -22,6 +22,7 @@ global D DD cruise COLS HEADER PARAMS
        if length(ST) == 4,
             STATIONS = [STATIONS; str2num(line1(1:coms(1)-1)) str2num(line1(coms(4)+1:coms(5)-1)) str2num(line1(coms(3)+1:coms(4)-1)) str2num(line1(coms(5)+1:coms(6)-1))];
        else
+         %  keyboard
             STATIONS = [STATIONS; str2num(line1(1:coms(1)-1)) str2num(line1(coms(4)+1:coms(5)-1)) str2num(line1(coms(3)+1:coms(4)-1)) NaN];
        end
        
@@ -234,24 +235,9 @@ if strcmp(button,'Yes')
     disp(['Type dbcont once files are checked.'])
     keyboard
 
-%%%% put datafiles where they belong
-    
-    % below is hard-coded for Seth's Mac
-    % eval(['!cp ' cruise '.all.ctd_stn_names ~/matlabSD/PLOT/Data/' cruise '.all.ctd_stn_names']);
-    % eval(['!cp ' cruise '.all.ctd_stations  ~/matlabSD/PLOT/Data/' cruise '.all.ctd_stations']);
-    % eval(['!cp ' cruise '.all.ctd_casts     ~/matlabSD/PLOT/Data/' cruise '.all.ctd_casts']);
-    % eval(['!cp ' cruise '.all.dat           ~/matlabSD/PLOTS/Transects/' cruise '.all.dat']);
-    % disp('Files *.all.* copied to PLOT/Data and PLOTS/Transects as appropriate.')
-    
-    eval(['!copy ' cruise '.all.ctd_stn_names ' PARAMS.outdir '/' cruise '.all.ctd_stn_names']);
-    eval(['!copy ' cruise '.all.ctd_stations '  PARAMS.outdir '/' cruise '.all.ctd_stations']);
-    eval(['!copy ' cruise '.all.ctd_casts '     PARAMS.outdir '/' cruise '.all.ctd_casts']);
-    eval(['!copy ' cruise '.all.dat '           PARAMS.outdir '/' cruise '.all.dat']);
-    disp('Files *.all.* copied to selected output directory as appropriate.')
-
-
 %%%% Pull out GAK1 profile at standard depths
     ExtractGAK1ctdATstandardDepths(cruise);
+
 else
     disp('No data saved.'); disp(' '); beep;
 end
