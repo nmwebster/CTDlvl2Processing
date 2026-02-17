@@ -2,13 +2,13 @@
 
 % DIRECTORY INFORMATION 
 
-PARAMS.indir = 'C:\Users\nmwebster\Documents\projects\TGX202509_CTD';
-PARAMS.outdir = 'C:\Users\nmwebster\Documents\projects\TGX202509_CTD';
+PARAMS.indir = 'C:\Users\nmwebster\Documents\projects\CTD\TGX202509_CTD';
+PARAMS.outdir = 'C:\Users\nmwebster\Documents\projects\CTD\TGX202509_CTD';
 PARAMS.outafname = 'TGX202509.ascii';
 PARAMS.outhfname = 'TGX202509.hdr';
 
-CTDstatic.indir = 'C:\Users\nmwebster\Documents\projects\TGX202509_CTD';
-CTDstatic.outdir = 'C:\Users\nmwebster\Documents\projects\TGX202509_CTD';
+CTDstatic.indir = 'C:\Users\nmwebster\Documents\projects\CTD\TGX202509_CTD';
+CTDstatic.outdir = 'C:\Users\nmwebster\Documents\projects\CTD\TGX202509_CTD';
 CTDstatic.outafname = 'TGX202509.ascii';
 CTDstatic.outhfname = 'TGX202509.hdr';
 
