@@ -19,12 +19,13 @@ TIMEOFFSET = PARAMS.timeoff; %0/24; % employ to convert to GMT if needed
 year = PARAMS.year;
 DEPLAT = PARAMS.depLat;
 CTDvariables  = strvcat('Temperature [ITS-90, deg C]',...% unique variable names found in CNV file header: these are the columns to plot for upcast/downcast selection
-                        'Salinity ',...
-                        'sigma-t00: Density [sigma-t, kg/m^3 ]');
+                        'Salinity, Practical [PSU] ',...
+                        'sigma-é00: Density [sigma-theta, kg/m^3]');
+                        %sigma-t00: Density [sigma-t, kg/m^3]
                         %'Density [sigma-t, kg/m^3 ]'); 
 if PARAMS.SSsel == 1
     SELECTsensors = strvcat('Temperature [ITS-90, deg C]',...% unique variable names found in CNV file header: these are the columns to plot in plotSELECTsensors routine
-                             'Salinity ',...
+                             'Salinity, Practical [PSU] ',...
                              'sigma-é00: Density [sigma-theta, kg/m^3]',...
                              'Fluorescence, WET Labs ECO-AFL/FL [mg/m^3]',...
                              'PAR/Irradiance',...
@@ -262,8 +263,8 @@ for INfile = 1:length(a) % loop through each file
             end
             for XY2 = 1:mANC, % look for the CTDvariables variables
                 if findstr(H(XY,:),deblank(CTDvariables(XY2,:))); % if CTDvariables variable XY2 is found in row XY of header H,
-                    eval(['X' num2str(XY2) ' = str2num(H(XY,w(2):w(3)))+1;']); % find the column that the data sits in
-                    eval(['X' num2str(XY2) 'L = deblank(H(XY,w(5):end));']); % find the label to use for the data
+                    eval(['X' num2str(XY2) ' = str2num(H(XY,w(2):w(3)))+1;']) % find the column that the data sits in
+                    eval(['X' num2str(XY2) 'L = deblank(H(XY,w(5):end));']) % find the label to use for the data
                 end
             end
             eqs = findstr(H(XY,:),'=');

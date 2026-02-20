@@ -18,5 +18,9 @@ addpath Modules
 
 guiCTD
 
-%last update: 10/14/25 nmwebster
+%last update: 2/20/26 nmwebster
+    % if you run into error "unrecognized function or variable 'X3'
+    % check that your CTDvariable strings in 'complileCTD.m' lines 21-23
+    % match strings used in your CTD cnv files
+    % density is the usual culprit
 % Ava test
