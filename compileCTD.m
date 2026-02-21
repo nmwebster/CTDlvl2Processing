@@ -429,7 +429,7 @@ for INfile = 1:length(a) % loop through each file
                 outfmtH = [outfmtH strtrim(PARAMS.VARIABLEnameFORMATheader(VARrow,62:end)) ','];  % change the 62 if the variable definition array got bigger
             else
                 disp(['No corresponding column found for: ' strtrim(COLUMNnames(in,:))])
-                keyboard
+                1keyboard
             end
         end
         outfmtH = [outfmtH(1:end-1)];
