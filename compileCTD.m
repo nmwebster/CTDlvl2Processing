@@ -411,7 +411,7 @@ for INfile = 1:length(a) % loop through each file
         for in = 1:m,
             VARrow = strmatch(strtrim(COLUMNnames(in,:)), VARIABLEnameFORMAT);
             if ~isempty(VARrow),
-                disp(VARrow)
+                %disp(VARrow)
                 outfmt = [outfmt strtrim(VARIABLEnameFORMAT(VARrow,62:end)) ' '];  % change the 62 if the variable definition array got bigger
             else
                 disp(['No corresponding column found for: ' strtrim(COLUMNnames(in,:))])
